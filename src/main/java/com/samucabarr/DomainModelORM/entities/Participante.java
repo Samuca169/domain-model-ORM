@@ -3,6 +3,9 @@ package com.samucabarr.DomainModelORM.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratedColumn;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_participante")
 public class Participante {
@@ -13,6 +16,9 @@ public class Participante {
     private String nome;
     @Column(unique = true)
     private String email;
+
+    @ManyToMany(mappedBy = "participantes")
+    private Set<Atividade> atividades = new HashSet<>();
 
     public Participante() {
     }
@@ -45,5 +51,9 @@ public class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Atividade> getAtividades() {
+        return atividades;
     }
 }
