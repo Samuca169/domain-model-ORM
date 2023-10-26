@@ -3,6 +3,9 @@ package com.samucabarr.DomainModelORM.entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratedColumn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_Categoria")
 public class Categoria {
@@ -12,6 +15,9 @@ public class Categoria {
     private Integer id;
     @Column(columnDefinition = "TEXT")
     private String descricao;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Categoria() {
     }
@@ -37,4 +43,7 @@ public class Categoria {
         this.descricao = descricao;
     }
 
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
 }
